@@ -1,22 +1,25 @@
 import React from 'react';
-import {Field, reduxForm, focus} from 'redux-form';
+import {Field, reduxForm, reset} from 'redux-form';
 import Input from './input';
 import {required, nonEmpty} from '../validators';
 import {connect} from 'react-redux';
 
 export class QuestionForm extends React.Component {
-
+    onSubmit(values){
+        console.log(values);
+    }
 
     render() {
         let feedback;
         if (this.props.feedback){
-            feedback = <div className='feedback'>{this.props.feedback}</div>
+            feedback = <div className='feedback'>
+                <h2>{this.props.feedback}</h2>
+                </div>
         }
         return(
-            <form id='question-form'>
+            <form name='question-form' onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                 <div className='question-text'>
-                Question:
-                {this.props.text}
+                <h2>{this.props.text}</h2>
                 </div>
                 {feedback}
                 <Field

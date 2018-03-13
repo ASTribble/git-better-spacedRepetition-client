@@ -25,7 +25,6 @@ export const fetchProtectedData = () => (dispatch, getState) => {
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .then(res => {
-            console.log('res in protected data', res);
             return dispatch(fetchProtectedDataSuccess(res));
         })
         .catch(err => {
