@@ -43,7 +43,7 @@ export class QuestionForm extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-    text: state.protectedData.data.text,
+    text: state.protectedData.data.question,
     answer: state.protectedData.data.answer
 });
 
