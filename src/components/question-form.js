@@ -3,10 +3,11 @@ import {Field, reduxForm, reset} from 'redux-form';
 import Input from './input';
 import {required, nonEmpty} from '../validators';
 import {connect} from 'react-redux';
+import {checkAnswer} from '../helper-functions';
 
 export class QuestionForm extends React.Component {
     onSubmit(values){
-        console.log(values);
+        checkAnswer(values['answer-input']);
     }
 
     render() {
