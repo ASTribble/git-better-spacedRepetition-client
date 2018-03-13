@@ -2,13 +2,21 @@ import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from './input';
 import {required, nonEmpty} from '../validators';
+import {connect} from 'react-redux';
 
 export class QuestionForm extends React.Component {
 
+
     render() {
+        let feedback;
+        if (this.props.feedback){
+            feedback = <div className='feedback'>{this.props.feedback}</div>
+        }
         return(
             <form id='question-form'>
-                <div id='question-text'>
+                <div className='question-text'>
+                Question:
+                {this.props.text}
                 </div>
                 {feedback}
                 <Field
@@ -29,6 +37,12 @@ export class QuestionForm extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state, props) => ({
+    text: state.protectedData.data.text,
+    answer: state.protectedData.data.answer
+});
+
 export default reduxForm({
     form: 'question'
-})(QuestionForm);
+})(connect(mapStateToProps)(QuestionForm));
