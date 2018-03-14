@@ -3,11 +3,15 @@ import {Field, reduxForm, reset} from 'redux-form';
 import Input from './input';
 import {required, nonEmpty} from '../validators';
 import {connect} from 'react-redux';
-import {checkAnswer} from '../helper-functions';
-
+/* eslint-disable*/ 
 export class QuestionForm extends React.Component {
     onSubmit(values){
-        checkAnswer(values['answer-input']);
+      this.checkAnswer(values['answer-input'])
+    }
+
+    //doesn't technically check an answer 
+    checkAnswer(userAnswer=false){
+      this.dispatch(saveQuestionResult((this.props.answer === userAnswer), this.props.id));
     }
 
     render() {
@@ -43,6 +47,7 @@ export class QuestionForm extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
+    questionId: state.protectedData.data.id,
     text: state.protectedData.data.question,
     answer: state.protectedData.data.answer
 });

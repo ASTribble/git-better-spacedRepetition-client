@@ -31,3 +31,44 @@ export const fetchProtectedData = () => (dispatch, getState) => {
             dispatch(fetchProtectedDataError(err));
         });
 };
+
+export const SAVE_QUESTION_RESULT_REQUEST = 'SAVE_QUESTION_RESULT_REQUEST';
+export const saveQuestionResultRequest = () => ({
+  type: SAVE_QUESTION_RESULT_REQUEST,
+  savingQuestion = true
+});
+
+export const SAVE_QUESTION_RESULT_REQUEST = 'SAVE_QUESTION_RESULT_REQUEST';
+export const saveQuestionResultRequest = () => ({
+  type: SAVE_QUESTION_RESULT_REQUEST,
+  savingQuestion = false
+});
+
+
+export const SAVE_QUESTION_RESULT_ERROR= 'SAVE_QUESTION_RESULT_ERROR';
+export const saveQuestionResultError = (error) => ({
+  type: SAVE_QUESTION_RESULT_ERROR,
+  savingQuestion = false,
+  error
+});
+
+
+export const saveQuestionResult = (questionId, answer) =>{
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/questions`, {
+      method: 'POST',
+      headers: {
+          // Provide our auth token as credentials
+          Authorization: `Bearer ${authToken}`
+      },
+      data: {questionId, answer}
+  })
+      .then(res => normalizeResponseErrors(res))
+      .then(res => res.json())
+      .then(res => {console.log(res[0]);
+          return dispatch(saveQuesteionResultSuccess(res[0]));
+      })
+      .catch(err => {
+          dispatch(saveQuestionResultError(err));
+      });
+}
