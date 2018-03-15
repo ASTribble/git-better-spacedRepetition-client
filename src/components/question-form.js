@@ -14,6 +14,12 @@ export class QuestionForm extends React.Component {
 
     render() {
         let feedback;
+        let question;
+        if (this.props.loading){
+            question = 'Loading question...'
+        }else {
+            question = this.props.question
+        }
         if (this.props.feedback){
             feedback = <div className='feedback'>
                 <h2>{this.props.feedback}</h2>
@@ -22,7 +28,7 @@ export class QuestionForm extends React.Component {
         return(
             <form name='question-form' onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                 <div className='question-text'>
-                <h2>{this.props.text}</h2>
+                <h2>{question}</h2>
                 </div>
                 {feedback}
                 <Field
@@ -45,8 +51,9 @@ export class QuestionForm extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-    text: state.protectedData.data.question,
-    answer: state.protectedData.data.answer
+    question: state.protectedData.data.question,
+    answer: state.protectedData.data.answer,
+    loading: state.protectedData.loading
 });
 
 export default reduxForm({

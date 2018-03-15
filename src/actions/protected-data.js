@@ -1,6 +1,11 @@
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 
+export const FETCH_PROTECTED_DATA_REQUEST = 'FETCH_PROTECTED_DATA_REQUEST';
+export const fetchProtectedDataRequest = () => ({
+    type: FETCH_PROTECTED_DATA_REQUEST
+});
+
 export const FETCH_PROTECTED_DATA_SUCCESS = 'FETCH_PROTECTED_DATA_SUCCESS';
 export const fetchProtectedDataSuccess = data => ({
     type: FETCH_PROTECTED_DATA_SUCCESS,
@@ -15,6 +20,7 @@ export const fetchProtectedDataError = error => ({
 
 
 export const fetchProtectedData = () => (dispatch, getState) => {
+    dispatch(fetchProtectedDataRequest());
     const authToken = getState().auth.authToken;
     return fetch(`${API_BASE_URL}/questions`, {
         method: 'GET',
@@ -34,6 +40,7 @@ export const fetchProtectedData = () => (dispatch, getState) => {
 };
 
 export const sendAnswerResponse = () => (dispatch, getState) => {
+    dispatch(fetchProtectedDataRequest());
     const authToken = getState().auth.authToken;
     return fetch(`${API_BASE_URL}/questions`, {
         method: 'PUT',
@@ -48,8 +55,8 @@ export const sendAnswerResponse = () => (dispatch, getState) => {
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .then(res => {
-            console.log(res);
-            return dispatch(fetchProtectedData());
+            console.log('response', res);
+            return dispatch(fetchProtectedDataSuccess(res));
         })
         .catch(err => {
             dispatch(fetchProtectedDataError(err));
