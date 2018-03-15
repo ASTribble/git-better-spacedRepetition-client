@@ -35,25 +35,25 @@ export const fetchProtectedData = () => (dispatch, getState) => {
 export const SAVE_QUESTION_RESULT_REQUEST = 'SAVE_QUESTION_RESULT_REQUEST';
 export const saveQuestionResultRequest = () => ({
   type: SAVE_QUESTION_RESULT_REQUEST,
-  savingQuestion = true
+  savingQuestion: true
 });
 
-export const SAVE_QUESTION_RESULT_REQUEST = 'SAVE_QUESTION_RESULT_REQUEST';
-export const saveQuestionResultRequest = () => ({
-  type: SAVE_QUESTION_RESULT_REQUEST,
-  savingQuestion = false
+export const SAVE_QUESTION_RESULT_SUCCESS = 'SAVE_QUESTION_RESULT_SUCCESS';
+export const saveQuestionResultSuccess = () => ({
+  type: SAVE_QUESTION_RESULT_SUCCESS,
+  savingQuestion: false
 });
 
 
 export const SAVE_QUESTION_RESULT_ERROR= 'SAVE_QUESTION_RESULT_ERROR';
 export const saveQuestionResultError = (error) => ({
   type: SAVE_QUESTION_RESULT_ERROR,
-  savingQuestion = false,
+  savingQuestion: false,
   error
 });
 
 
-export const saveQuestionResult = (questionId, answer) =>{
+export const saveQuestionResult = (questionId, answer) => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/questions`, {
       method: 'POST',
@@ -66,7 +66,7 @@ export const saveQuestionResult = (questionId, answer) =>{
       .then(res => normalizeResponseErrors(res))
       .then(res => res.json())
       .then(res => {console.log(res[0]);
-          return dispatch(saveQuesteionResultSuccess(res[0]));
+          return dispatch(saveQuestionResultSuccess(res[0]));
       })
       .catch(err => {
           dispatch(saveQuestionResultError(err));
