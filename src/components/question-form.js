@@ -4,9 +4,11 @@ import Input from './input';
 import {required, nonEmpty} from '../validators';
 import {connect} from 'react-redux';
 import {checkAnswer} from '../helper-functions';
+import { sendAnswerResponse} from '../actions/protected-data';
 
 export class QuestionForm extends React.Component {
     onSubmit(values){
+        this.props.dispatch(sendAnswerResponse());
         checkAnswer(values['answer-input']);
     }
 

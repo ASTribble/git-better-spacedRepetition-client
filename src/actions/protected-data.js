@@ -39,9 +39,11 @@ export const sendAnswerResponse = () => (dispatch, getState) => {
         method: 'PUT',
         headers: {
             // Provide our auth token as credentials
-            Authorization: `Bearer ${authToken}`
+            'Authorization': `Bearer ${authToken}`,
+            'content-type': 'application/json',
+            'Accept': 'application/json'
         },
-        body: JSON.stringify({answer: true})
+        body: JSON.stringify({questionId: 3, answer: true})
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
