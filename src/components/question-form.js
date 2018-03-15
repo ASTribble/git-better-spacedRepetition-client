@@ -11,7 +11,9 @@ export class QuestionForm extends React.Component {
     }
 
     checkAnswer(userAnswer=false){
-      this.dispatch(saveQuestionResult((this.props.answer === userAnswer), this.props.id));
+      const answer = this.props.answer === userAnswer;
+      const id = this.props.questionId; 
+      this.props.dispatch(saveQuestionResult(id, answer));
     }
 
     render() {
@@ -47,7 +49,7 @@ export class QuestionForm extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-    questionId: state.protectedData.data.id,
+    questionId: state.protectedData.data._id,
     text: state.protectedData.data.question,
     answer: state.protectedData.data.answer
 });

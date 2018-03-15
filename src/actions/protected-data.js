@@ -54,18 +54,22 @@ export const saveQuestionResultError = (error) => ({
 
 
 export const saveQuestionResult = (questionId, answer) => (dispatch, getState) => {
+  console.log('We have question id ', questionId, ' and the answer was ', answer)
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/questions`, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
           // Provide our auth token as credentials
-          Authorization: `Bearer ${authToken}`
+          'Authorization': `Bearer ${authToken}`,
+          'content-type':'application/json',
+          'accept':'application/json'
       },
-      data: {questionId, answer}
+      body: JSON.stringify({questionId: questionId, answer: answer})
   })
       .then(res => normalizeResponseErrors(res))
       .then(res => res.json())
       .then(res => {console.log(res[0]);
+          dispatch(fetchProtectedData())
           return dispatch(saveQuestionResultSuccess(res[0]));
       })
       .catch(err => {
