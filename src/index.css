@@ -27,7 +27,7 @@ p{
   margin: 1em auto;
   width: 50%;
 }
-.form-error, .feedback {
+.form-error {
   color: #cf4475;
 }
 
