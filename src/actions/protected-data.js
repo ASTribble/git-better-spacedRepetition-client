@@ -15,7 +15,7 @@ export const fetchProtectedDataError = error => ({
 
 export const fetchProtectedData = () => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-    return fetch(`${API_BASE_URL}/questions`, {
+    return fetch(`${API_BASE_URL}/questions/v2`, {
         method: 'GET',
         headers: {
             // Provide our auth token as credentials
@@ -24,8 +24,8 @@ export const fetchProtectedData = () => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then(res => {console.log(res[0]);
-            return dispatch(fetchProtectedDataSuccess(res[0]));
+        .then(res => {console.log(res);
+            return dispatch(fetchProtectedDataSuccess(res));
         })
         .catch(err => {
             dispatch(fetchProtectedDataError(err));
@@ -56,7 +56,7 @@ export const saveQuestionResultError = (error) => ({
 
 export const saveQuestionResult = (questionId, answer) => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/questions`, {
+  return fetch(`${API_BASE_URL}/questions/v2`, {
       method: 'PUT',
       headers: {
           // Provide our auth token as credentials
