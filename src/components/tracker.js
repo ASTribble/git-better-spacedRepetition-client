@@ -1,4 +1,5 @@
 import React from 'react';
+import './tracker.css';
 
 export default function Tracker(props){
     return(
