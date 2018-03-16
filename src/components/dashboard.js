@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
 import {fetchProtectedData} from '../actions/protected-data';
 import QuestionForm from './question-form';
-
+import './dashboard.css';
 export class Dashboard extends React.Component {
     componentDidMount() {
         this.props.dispatch(fetchProtectedData());
@@ -13,9 +13,9 @@ export class Dashboard extends React.Component {
         return (
             <div className="dashboard">
                 <div className="dashboard-username">
-                    Username: {this.props.username}
+                :git-better-username: {this.props.username}$
                 </div>
-                <div className="dashboard-name">Name: {this.props.name}</div>
+                <div className="dashboard-name">:git-better-name: {this.props.name}$</div>
                 <div className="dashboard-protected-data">
                     <QuestionForm />
                 </div>

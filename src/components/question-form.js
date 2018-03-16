@@ -27,7 +27,7 @@ export class QuestionForm extends React.Component {
                 <div className='question-text'>
                 <h2>{this.props.text}</h2>
                 </div>
-                {feedback !== null ? feedback ? 'Correct!' : `Incorrect. The correct answer was: ${this.props.answer}` : ''}
+                {feedback !== null ? feedback ? <p className='feedback'>Correct!</p> :<div> <p className='feedback'>Incorrect.</p> <p className='answer'>The correct answer was: {this.props.answer}</p></div> : ''}
                 <Field
                     component={Input}
                     type='text'

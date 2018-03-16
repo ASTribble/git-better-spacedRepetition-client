@@ -1,0 +1,15 @@
+.dashboard-name, .dashboard-username {
+  text-align: left;
+  padding: .1em;
+}
+
+
+@media(min-width: 450px){
+  .dashboard {
+      padding: 6%;
+      margin: 2% auto;
+      border: 1px solid #183349;
+      border-radius: 3em;
+      max-width: 600px;
+  }
+}
