@@ -37,10 +37,21 @@ export default function reducer(state = initialState, action) {
         });
     }
     else if(action.type === SAVE_QUESTION_RESULT_SUCCESS){
-      return Object.assign({}, state, {
-        savingQuestion: false,
-        previousQuestionAnsweredCorrectly: action.previousQuestionAnsweredCorrectly
-      });
+      console.log('state.data in saveQuestionResult:', state.data);
+      if(action.previousQuestionAnsweredCorrectly){
+        return Object.assign({}, state, {
+          data: {...state.data, timesAsked: state.data.timesAsked + 1, correct: state.data.timesAsked + 1},
+          savingQuestion: false,
+          previousQuestionAnsweredCorrectly: action.previousQuestionAnsweredCorrectly
+        });
+      }
+      else{
+        return Object.assign({}, state, {
+          data: {...state.data, timesAsked: state.data.timesAsked + 1},
+          savingQuestion: false,
+          previousQuestionAnsweredCorrectly: action.previousQuestionAnsweredCorrectly
+        });
+    }
     } else if (action.type === SAVE_QUESTION_RESULT_ERROR){
       return Object.assign({}, state, {
         saveQuestion: false,

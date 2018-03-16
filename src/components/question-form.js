@@ -3,7 +3,8 @@ import {Field, reduxForm, reset} from 'redux-form';
 import Input from './input';
 import {required, nonEmpty} from '../validators';
 import {connect} from 'react-redux';
-import { saveQuestionResult, fetchNextQuestion } from '../actions/protected-data'
+import { saveQuestionResult, fetchNextQuestion } from '../actions/protected-data';
+import Tracker from './tracker';
 /* eslint-disable*/ 
 export class QuestionForm extends React.Component {
     onSubmit(values){
@@ -43,6 +44,9 @@ export class QuestionForm extends React.Component {
                 />
                 {feedback === null ? submitButton : ''}
                 {feedback !== null ? nextButton : ''}
+                {feedback !== null ? <Tracker 
+                        timesAsked={this.props.timesAsked} 
+                        correct={this.props.correct}/> : ''}
             </form>
         )
     }
@@ -52,6 +56,8 @@ const mapStateToProps = (state, props) => ({
     questionId: state.protectedData.data._id,
     text: state.protectedData.data.question,
     answer: state.protectedData.data.answer,
+    correct: state.protectedData.data.correct,
+    timesAsked: state.protectedData.data.timesAsked,
   previousQuestionAnsweredCorrectly: state.protectedData.previousQuestionAnsweredCorrectly
 });
 
