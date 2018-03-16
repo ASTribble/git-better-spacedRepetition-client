@@ -44,7 +44,9 @@ export class QuestionForm extends React.Component {
                 />
                 {feedback === null ? submitButton : ''}
                 {feedback !== null ? nextButton : ''}
-                <Tracker timesAsked={this.props.timesAsked} correct={this.props.correct}/>
+                {feedback !== null ? <Tracker 
+                        timesAsked={this.props.timesAsked} 
+                        correct={this.props.correct}/> : ''}
             </form>
         )
     }
