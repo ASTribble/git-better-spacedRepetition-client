@@ -24,7 +24,7 @@ export const fetchProtectedData = () => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then(res => {console.log(res);
+        .then(res => {
             return dispatch(fetchProtectedDataSuccess(res));
         })
         .catch(err => {
@@ -69,11 +69,9 @@ export const saveQuestionResult = (questionId, answer) => (dispatch, getState) =
       .then(res => normalizeResponseErrors(res))
       .then(res => res.json())
       .then(res => {
-        // if feedback is just a function or outcome of the state
+        // send answer to state so it can render feedback
         let previousQuestionAnsweredCorrectly = answer;
-        console.log('Does this have anything? ')
-        console.log(answer)
-        console.log('^')
+
           return dispatch(
             saveQuestionResultSuccess(previousQuestionAnsweredCorrectly)
           );

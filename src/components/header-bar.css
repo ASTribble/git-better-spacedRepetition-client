@@ -1,25 +1,19 @@
-  .header-bar {
-    display: flex;
-    align-items: center;
-    padding-bottom: 1em;
-    margin: 3em auto;
-    justify-content: space-between;
-    max-width: 700px;
-    border-bottom: 1px solid #183349;
-  }
+.header-bar {
+  display: flex;
+  align-items: center;
+  padding-bottom: 1em;
+  margin: 3em auto;
+  justify-content: space-between;
+  max-width: 700px;
+  border-bottom: 1px solid #295375;;
+}
 
 h1 {
-  /* text-align: left; */
-  /* margin-left: .3em; */
   color: #62c653;
   padding: 0;
   margin: 0;
 }
- .header-bar button{
-   margin:0;
- }
 
-@media (min-width: 550px){
-
-
+.header-bar button{
+  margin:0;
 }
