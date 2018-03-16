@@ -39,9 +39,10 @@ export const saveQuestionResultRequest = () => ({
 });
 
 export const SAVE_QUESTION_RESULT_SUCCESS = 'SAVE_QUESTION_RESULT_SUCCESS';
-export const saveQuestionResultSuccess = () => ({
+export const saveQuestionResultSuccess = (previousQuestionAnsweredCorrectly) => ({
   type: SAVE_QUESTION_RESULT_SUCCESS,
-  savingQuestion: false
+  savingQuestion: false,
+  previousQuestionAnsweredCorrectly
 });
 
 
@@ -54,7 +55,6 @@ export const saveQuestionResultError = (error) => ({
 
 
 export const saveQuestionResult = (questionId, answer) => (dispatch, getState) => {
-  console.log('We have question id ', questionId, ' and the answer was ', answer)
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/questions`, {
       method: 'PUT',
@@ -68,11 +68,29 @@ export const saveQuestionResult = (questionId, answer) => (dispatch, getState) =
   })
       .then(res => normalizeResponseErrors(res))
       .then(res => res.json())
-      .then(res => {console.log(res[0]);
-          dispatch(fetchProtectedData())
-          return dispatch(saveQuestionResultSuccess(res[0]));
+      .then(res => {
+        // if feedback is just a function or outcome of the state
+        let previousQuestionAnsweredCorrectly = answer;
+        console.log('Does this have anything? ')
+        console.log(answer)
+        console.log('^')
+          return dispatch(
+            saveQuestionResultSuccess(previousQuestionAnsweredCorrectly)
+          );
       })
       .catch(err => {
           dispatch(saveQuestionResultError(err));
       });
 }
+
+export const FETCH_NEXT_QUESTION_SUCCESS = 'FETCH_NEXT_QUESTION_SUCCESS';
+export const fetchNextQuestionSuccess = () => ({
+  type: FETCH_NEXT_QUESTION_SUCCESS,
+  previousQuestionAnsweredCorrectly: null
+});
+
+export const fetchNextQuestion = () => (dispatch, getState) => {
+  dispatch(fetchNextQuestionSuccess())
+  dispatch(fetchProtectedData());
+}
+
