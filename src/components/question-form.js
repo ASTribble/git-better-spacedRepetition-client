@@ -1,12 +1,12 @@
 import React from 'react';
-import {Field, reduxForm, reset} from 'redux-form';
+import {Field, reduxForm} from 'redux-form';
 import Input from './input';
 import {required, nonEmpty} from '../validators';
 import {connect} from 'react-redux';
 import { saveQuestionResult, fetchNextQuestion } from '../actions/protected-data';
 import Tracker from './tracker';
 import './question-form.css';
-/* eslint-disable*/ 
+
 export class QuestionForm extends React.Component {
     onSubmit(values){
       const answer = this.props.answer ===values['answer-input'];
@@ -20,22 +20,33 @@ export class QuestionForm extends React.Component {
       this.props.dispatch(fetchNextQuestion());
     }
     render() {
-        let nextButton =  <button type="button" onClick={e => this.fetchNextQuestion()}> Next </button>
+        let nextButton =  
+            <button 
+                type="button" 
+                onClick={e => this.fetchNextQuestion()}
+            > 
+                Next
+            </button>
         
         let feedback = this.props.previousQuestionAnsweredCorrectly
-        let submitButton =  <button 
-                    type='submit'
-                    disabled={this.props.pristine || this.props.submitting || this.props.showNextButton}
-                    >
+        let submitButton =  
+            <button 
+                type='submit'
+                disabled={this.props.pristine || this.props.submitting || this.props.showNextButton}
+            >
                 Submit Answer
-                </button>
+            </button>
 
         return(
-            <form name='question-form' onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+            <form 
+                name='question-form' 
+                onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
+            >
                 <div className='question-text'>
                 <h2 className='question'>{this.props.text}</h2>
                 </div>
                 {feedback !== null ? feedback ? <div className='feedback-div'> <p className='feedback'>Correct!</p> </div>:<div className='feedback-div'> <p className='feedback'>Incorrect.</p> <p className='answer'>The correct answer was: {this.props.answer}</p></div> : ''}
+                
                 <Field
                     component={Input}
                     type='text'
@@ -43,11 +54,11 @@ export class QuestionForm extends React.Component {
                     id='answer-input'
                     validate={[required, nonEmpty]}
                 />
+
                 {feedback === null ? submitButton : ''}
                 {feedback !== null ? nextButton : ''}
-                {feedback !== null ? <Tracker 
-                        timesAsked={this.props.timesAsked} 
-                        correct={this.props.correct}/> : ''}
+                {feedback !== null ? <Tracker timesAsked={this.props.timesAsked} correct={this.props.correct}/> : ''}
+                
             </form>
         )
     }
