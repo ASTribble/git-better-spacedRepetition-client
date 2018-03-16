@@ -21,7 +21,13 @@ export class QuestionForm extends React.Component {
         let nextButton =  <button type="button" onClick={e => this.fetchNextQuestion()}> Next </button>
         
         let feedback = this.props.previousQuestionAnsweredCorrectly
-      
+        let submitButton =  <button 
+                    type='submit'
+                    disabled={this.props.pristine || this.props.submitting || this.props.showNextButton}
+                    >
+                Submit Answer
+                </button>
+
         return(
             <form name='question-form' onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                 <div className='question-text'>
@@ -35,12 +41,7 @@ export class QuestionForm extends React.Component {
                     id='answer-input'
                     validate={[required, nonEmpty]}
                 />
-                <button 
-                    type='submit'
-                    disabled={this.props.pristine || this.props.submitting || this.props.showNextButton}
-                >
-                Submit Answer
-                </button>
+                {feedback === null ? submitButton : ''}
                 {feedback !== null ? nextButton : ''}
             </form>
         )
