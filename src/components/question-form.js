@@ -5,6 +5,7 @@ import {required, nonEmpty} from '../validators';
 import {connect} from 'react-redux';
 import { saveQuestionResult, fetchNextQuestion } from '../actions/protected-data';
 import Tracker from './tracker';
+import './question-form.css';
 /* eslint-disable*/ 
 export class QuestionForm extends React.Component {
     onSubmit(values){
@@ -32,9 +33,9 @@ export class QuestionForm extends React.Component {
         return(
             <form name='question-form' onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                 <div className='question-text'>
-                <h2>{this.props.text}</h2>
+                <h2 className='question'>{this.props.text}</h2>
                 </div>
-                {feedback !== null ? feedback ? <p className='feedback'>Correct!</p> :<div> <p className='feedback'>Incorrect.</p> <p className='answer'>The correct answer was: {this.props.answer}</p></div> : ''}
+                {feedback !== null ? feedback ? <div className='feedback-div'> <p className='feedback'>Correct!</p> </div>:<div className='feedback-div'> <p className='feedback'>Incorrect.</p> <p className='answer'>The correct answer was: {this.props.answer}</p></div> : ''}
                 <Field
                     component={Input}
                     type='text'
