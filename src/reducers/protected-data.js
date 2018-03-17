@@ -33,7 +33,7 @@ export default function reducer(state = initialState, action) {
   
     if(action.previousQuestionAnsweredCorrectly){
       return Object.assign({}, state, {
-        data: {...state.data, timesAsked: state.data.timesAsked + 1, correct: state.data.timesAsked + 1},
+        data: {...state.data, timesAsked: state.data.timesAsked + 1, correct: state.data.correct + 1},
         savingQuestion: false,
         previousQuestionAnsweredCorrectly: action.previousQuestionAnsweredCorrectly
       });
