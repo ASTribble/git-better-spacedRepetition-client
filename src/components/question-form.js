@@ -8,22 +8,29 @@ import Tracker from './tracker';
 import './question-form.css';
 
 export class QuestionForm extends React.Component {
-    onSubmit(values){
-      const answer = this.props.answer ===values['answer-input'];
-      const id = this.props.questionId; 
-      this.props.dispatch(saveQuestionResult(id, answer));
+    
+    onSubmit(values, feedback) {
+        if (feedback === null) {
+            const answer = this.props.answer === values['answer-input'];
+            const id = this.props.questionId;
+            console.log('submitted line 17');
+            return this.props.dispatch(saveQuestionResult(id, answer));
+        }
+        console.log('did not submit line 20');
+        return;
     }
 
-    fetchNextQuestion(values){
-      const answerInput = document.querySelector('#answer-input');
-      answerInput.value = '';
-      this.props.dispatch(fetchNextQuestion());
+    fetchNextQuestion(values) {
+        console.log('went to get the next question');
+        this.props.dispatch(this.props.reset('questionForm'));
+        this.props.dispatch(fetchNextQuestion());
     }
+
     render() {
         let nextButton =  
             <button 
                 type="button" 
-                onClick={e => this.fetchNextQuestion()}
+                onClick={() => this.fetchNextQuestion()}
             > 
                 Next
             </button>
