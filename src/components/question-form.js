@@ -10,6 +10,7 @@ import './question-form.css';
 export class QuestionForm extends React.Component {
     
     onSubmit(values, feedback) {
+
         if (feedback === null) {
             const answer = this.props.answer === values['answer-input'];
             const id = this.props.questionId;
@@ -46,8 +47,8 @@ export class QuestionForm extends React.Component {
 
         return(
             <form 
-                name='question-form' 
-                onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
+                name='questionForm' 
+                onSubmit={this.props.handleSubmit(values => this.onSubmit(values, feedback))}
             >
                 <div className='question-text'>
                 <h2 className='question'>{this.props.text}</h2>
@@ -59,6 +60,8 @@ export class QuestionForm extends React.Component {
                     type='text'
                     name='answer-input'
                     id='answer-input'
+                    ref={input => this.input = input}
+                    className='form-input'
                     validate={[required, nonEmpty]}
                 />
 
