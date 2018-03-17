@@ -31,11 +31,7 @@ export class QuestionForm extends React.Component {
         let nextButton =  
             <button 
                 type="button" 
-                onClick={e => {
-                    // e.preventDefault();
-                    return this.fetchNextQuestion()
-                    }
-                }
+                onClick={() => this.fetchNextQuestion()}
             > 
                 Next
             </button>
