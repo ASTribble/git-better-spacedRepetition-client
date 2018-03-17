@@ -32,6 +32,7 @@ export class QuestionForm extends React.Component {
             <button 
                 type="button" 
                 onClick={() => this.fetchNextQuestion()}
+                autoFocus
             > 
                 Next
             </button>
