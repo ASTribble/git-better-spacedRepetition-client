@@ -8,22 +8,34 @@ import Tracker from './tracker';
 import './question-form.css';
 
 export class QuestionForm extends React.Component {
-    onSubmit(values){
-      const answer = this.props.answer ===values['answer-input'];
-      const id = this.props.questionId; 
-      this.props.dispatch(saveQuestionResult(id, answer));
+
+    onSubmit(values, feedback){
+
+        if ( feedback === null){
+            const answer = this.props.answer === values['answer-input'];
+            const id = this.props.questionId; 
+            console.log('submitted line 17');
+            return this.props.dispatch(saveQuestionResult(id, answer));
+        }
+        console.log('did not submit line 20');
+        return;
     }
 
     fetchNextQuestion(values){
-      const answerInput = document.querySelector('#answer-input');
-      answerInput.value = '';
-      this.props.dispatch(fetchNextQuestion());
+        console.log('went to get the next question');
+        this.props.dispatch(this.props.reset('questionForm'));
+        this.props.dispatch(fetchNextQuestion());
     }
+
     render() {
         let nextButton =  
             <button 
                 type="button" 
-                onClick={e => this.fetchNextQuestion()}
+                onClick={e => {
+                    // e.preventDefault();
+                    return this.fetchNextQuestion()
+                    }
+                }
             > 
                 Next
             </button>
@@ -39,8 +51,8 @@ export class QuestionForm extends React.Component {
 
         return(
             <form 
-                name='question-form' 
-                onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
+                name='questionForm' 
+                onSubmit={this.props.handleSubmit(values => this.onSubmit(values, feedback))}
             >
                 <div className='question-text'>
                 <h2 className='question'>{this.props.text}</h2>
@@ -52,7 +64,10 @@ export class QuestionForm extends React.Component {
                     type='text'
                     name='answer-input'
                     id='answer-input'
+                    ref={input => this.input = input}
+                    className='form-input'
                     validate={[required, nonEmpty]}
+                    
                 />
 
                 {feedback === null ? submitButton : ''}
