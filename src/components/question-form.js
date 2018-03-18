@@ -14,15 +14,13 @@ export class QuestionForm extends React.Component {
         if ( feedback === null){
             const answer = this.props.answer === values['answer-input'];
             const id = this.props.questionId; 
-            console.log('submitted line 17');
             return this.props.dispatch(saveQuestionResult(id, answer));
         }
-        console.log('did not submit line 20');
+
         return;
     }
 
     fetchNextQuestion(values){
-        console.log('went to get the next question');
         this.props.dispatch(this.props.reset('questionForm'));
         this.props.dispatch(fetchNextQuestion());
     }
