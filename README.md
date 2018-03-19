@@ -1,4 +1,5 @@
 # GIT BETTER
+---
 
 A learning tool for practicing git commands.
   - Practice 10 Git Commands
@@ -6,13 +7,14 @@ A learning tool for practicing git commands.
   - See problematic questions more often.  
 
 ## Links
-
+---
   - See the app live at: https://cranky-jackson-36d9ef.netlify.com
   - View the Client Repo: https://github.com/ASTribble/git-better-spacedRepetition-client
   - View the Server Repo: https://github.com/YourWebDevGuy/git-better-spacedRepetition-server
   - Server hosted at: http://git-better-server.herokuapp.com
 
 ## Screenshots
+---
 
 ### Larger Screen Views:
 
@@ -36,10 +38,16 @@ A learning tool for practicing git commands.
 #### Feedback View for Incorrect Answers:
 ![Feedback view with incorrect answer.](./src/screenshots/feedback-incorrect-mobile.png)
 
+## Technology Stack
+---
 
 ### Front-end technologies​
 - Javascript, CSS, HTML
 - REACT with Redux
+
+### Server Technologies
+- Node.js
+- Express
 
 ### Authentication
 - Bcrytp.js
