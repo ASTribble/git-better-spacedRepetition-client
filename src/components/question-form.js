@@ -1,8 +1,9 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
+import {connect} from 'react-redux';
+import requiresLogin from './requires-login';
 import Input from './input';
 import {required, nonEmpty} from '../validators';
-import {connect} from 'react-redux';
 import { saveQuestionResult, fetchNextQuestion } from '../actions/protected-data';
 import Tracker from './tracker';
 import './question-form.css';
@@ -83,6 +84,6 @@ const mapStateToProps = (state, props) => ({
     previousQuestionAnsweredCorrectly: state.protectedData.previousQuestionAnsweredCorrectly
 });
 
-export default reduxForm({
+export default requiresLogin()(reduxForm({
     form: 'question'
-})(connect(mapStateToProps)(QuestionForm));
+})(connect(mapStateToProps)(QuestionForm)));
