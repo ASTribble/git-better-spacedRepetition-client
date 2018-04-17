@@ -50,8 +50,9 @@ export class QuestionForm extends React.Component {
                 onSubmit={this.props.handleSubmit(values => this.onSubmit(values, feedback))}
             >
                 <div className='question-text'>
-                <h2 className='question'>{this.props.text}</h2>
+                    <h2 className='question'>{this.props.text}</h2>
                 </div>
+
                 {feedback !== null ? feedback ? <div className='feedback-div'> <p className='feedback'>Correct!</p> </div>:<div className='feedback-div'> <p className='feedback'>Incorrect.</p> <p className='answer'>The correct answer was: {this.props.answer}</p></div> : ''}
                 
                 <Field
@@ -61,8 +62,7 @@ export class QuestionForm extends React.Component {
                     id='answer-input'
                     ref={input => this.input = input}
                     className='form-input'
-                    validate={[required, nonEmpty]}
-                    
+                    validate={[required, nonEmpty]}   
                 />
 
                 {feedback === null ? submitButton : ''}
@@ -80,7 +80,7 @@ const mapStateToProps = (state, props) => ({
     answer: state.protectedData.data.answer,
     correct: state.protectedData.data.correct,
     timesAsked: state.protectedData.data.timesAsked,
-  previousQuestionAnsweredCorrectly: state.protectedData.previousQuestionAnsweredCorrectly
+    previousQuestionAnsweredCorrectly: state.protectedData.previousQuestionAnsweredCorrectly
 });
 
 export default reduxForm({
