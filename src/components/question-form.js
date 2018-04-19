@@ -63,7 +63,7 @@ export class QuestionForm extends React.Component {
                     id='answer-input'
                     ref={input => this.input = input}
                     className='form-input'
-                    validate={[required, nonEmpty]}   
+                    validate={[required, nonEmpty]}
                 />
 
                 {feedback === null ? submitButton : ''}
