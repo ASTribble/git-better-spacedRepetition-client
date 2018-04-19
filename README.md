@@ -11,8 +11,8 @@ A learning tool for practicing git commands.
 ## Links
 ---
   - See the app live at: https://cranky-jackson-36d9ef.netlify.com
-  - View the Client Repo: https://github.com/ASTribble/git-better-spacedRepetition-client
-  - View the Server Repo: https://github.com/YourWebDevGuy/git-better-spacedRepetition-server
+  - View the Client Repo: https://github.com/ASTribble/GitBetter-client
+  - View the Server Repo: https://github.com/ASTribble/GitBetter-server
   - Server hosted at: http://git-better-server.herokuapp.com
 
 ---
