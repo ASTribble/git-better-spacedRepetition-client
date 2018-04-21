@@ -1,13 +1,15 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
+import {connect} from 'react-redux';
+import requiresLogin from './requires-login';
 import Input from './input';
 import {required, nonEmpty} from '../validators';
-import {connect} from 'react-redux';
 import { saveQuestionResult, fetchNextQuestion } from '../actions/protected-data';
 import Tracker from './tracker';
 import './question-form.css';
 
 export class QuestionForm extends React.Component {
+<<<<<<< HEAD
     
     onSubmit(values, feedback) {
 
@@ -23,6 +25,21 @@ export class QuestionForm extends React.Component {
 
     fetchNextQuestion(values) {
         console.log('went to get the next question');
+=======
+
+    onSubmit(values, feedback){
+
+        if ( feedback === null){
+            const answer = this.props.answer === values['answer-input'];
+            const id = this.props.questionId; 
+            return this.props.dispatch(saveQuestionResult(id, answer));
+        }
+
+        return;
+    }
+
+    fetchNextQuestion(values){
+>>>>>>> 84f08e7e30109a59e53f777f843bfaddb592a444
         this.props.dispatch(this.props.reset('questionForm'));
         this.props.dispatch(fetchNextQuestion());
     }
@@ -32,6 +49,10 @@ export class QuestionForm extends React.Component {
             <button 
                 type="button" 
                 onClick={() => this.fetchNextQuestion()}
+<<<<<<< HEAD
+=======
+                autoFocus
+>>>>>>> 84f08e7e30109a59e53f777f843bfaddb592a444
             > 
                 Next
             </button>
@@ -51,8 +72,9 @@ export class QuestionForm extends React.Component {
                 onSubmit={this.props.handleSubmit(values => this.onSubmit(values, feedback))}
             >
                 <div className='question-text'>
-                <h2 className='question'>{this.props.text}</h2>
+                    <h2 className='question'>{this.props.text}</h2>
                 </div>
+
                 {feedback !== null ? feedback ? <div className='feedback-div'> <p className='feedback'>Correct!</p> </div>:<div className='feedback-div'> <p className='feedback'>Incorrect.</p> <p className='answer'>The correct answer was: {this.props.answer}</p></div> : ''}
                 
                 <Field
@@ -80,9 +102,9 @@ const mapStateToProps = (state, props) => ({
     answer: state.protectedData.data.answer,
     correct: state.protectedData.data.correct,
     timesAsked: state.protectedData.data.timesAsked,
-  previousQuestionAnsweredCorrectly: state.protectedData.previousQuestionAnsweredCorrectly
+    previousQuestionAnsweredCorrectly: state.protectedData.previousQuestionAnsweredCorrectly
 });
 
-export default reduxForm({
+export default requiresLogin()(reduxForm({
     form: 'question'
-})(connect(mapStateToProps)(QuestionForm));
+})(connect(mapStateToProps)(QuestionForm)));
