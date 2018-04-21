@@ -16,6 +16,8 @@ export function LandingPage(props) {
             <p>:git-better$ git better</p>
             <LoginForm />
             <Link to="/register">Register</Link>
+            <p className='demo'>:demo-username$ demo</p>
+            <p>:demo-password$ git-better</p>
         </div>
     );
 }

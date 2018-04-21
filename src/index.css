@@ -24,12 +24,16 @@ p {
 }
 
 .login-form {
-  margin: 1em auto;
+  margin: 2em auto 1em;
   width: 50%;
 }
 
 .form-error {
   color: #cf4475;
+}
+
+.demo {
+  margin-top: 2em;
 }
 
 .answer {
